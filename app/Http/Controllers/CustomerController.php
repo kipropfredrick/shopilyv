@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Redirect,Response;
 class CustomerController extends Controller
@@ -14,11 +15,11 @@ class CustomerController extends Controller
 
 	public function index()
 	{
-		$customers = Customer::latest()->paginate(4);
+		$customers = User::latest()->paginate(4);
 		return view('customers.index',compact('customers'))->with('i', (request()->input('page', 1) - 1) * 4);
 	}
 	public function display(){
-		$userdetails= Customer::all();
+		$userdetails= User::all();
 		return $userdetails;
 	}
 
@@ -46,11 +47,11 @@ class CustomerController extends Controller
 		$r=$request->validate([
 		'name' => 'required',
 		'email' => 'required',
-		'address' => 'required',
+		
 		]);
 
 		$custId = $request->cust_id;
-		Customer::updateOrCreate(['id' => $custId],['name' => $request->name, 'email' => $request->email,'address'=>$request->address]);
+		User::updateOrCreate(['id' => $custId],['name' => $request->name, 'email' => $request->email]);
 		if(empty($request->cust_id))
 			$msg = 'Customer entry created successfully.';
 		else
@@ -65,7 +66,7 @@ class CustomerController extends Controller
 	* @return \Illuminate\Http\Response
 	*/
 
-	public function show(Customer $customer)
+	public function show(User $customer)
 	{
 		return view('customers.show',compact('customer'));
 	}
@@ -80,7 +81,7 @@ class CustomerController extends Controller
 	public function edit($id)
 	{
 		$where = array('id' => $id);
-		$customer = Customer::where($where)->first();
+		$customer = User::where($where)->first();
 		return Response::json($customer);
 	}
 
@@ -109,11 +110,10 @@ class CustomerController extends Controller
 		$cust = Customer::where('id',$id)->delete();
 		return Response::json($cust);
 	}
-	public function delete(Request $request, $id)
+	public function delete($id)
     {
-        $user = Customer::findOrFail($id);
-        $user->delete();
+        $project = Project::find($id);
 
-        return 204;
+        return view('projects.delete', compact('project'));
     }
 }

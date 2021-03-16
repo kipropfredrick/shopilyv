@@ -20,3 +20,7 @@ Route::resource('customers','App\Http\Controllers\CustomerController');
 Route::get('customers/{id}/edit/','CustomerController@edit');
 Route::delete('customers/{id}/destroy/','CustomerController@destroy');
 Route::delete('delete/{id}', [CustomerController::class, 'delete']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

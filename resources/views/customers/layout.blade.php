@@ -36,7 +36,7 @@ $('#crud-modal').modal('show');
 $('#cust_id').val(data.id);
 $('#name').val(data.name);
 $('#email').val(data.email);
-$('#address').val(data.address);
+
 })
 });
 /* Show customer */

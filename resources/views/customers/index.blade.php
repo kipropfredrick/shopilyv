@@ -1,5 +1,6 @@
 @extends('customers.layout')
 @section('content')
+
 <div class="row">
 <div class="col-lg-12" style="text-align: center">
 <div >
@@ -26,7 +27,7 @@
 <th>ID</th>
 <th>Name</th>
 <th>Email</th>
-<th>Address</th>
+
 <th width="280px">Action</th>
 </tr>
 
@@ -35,7 +36,7 @@
 <td>{{ $customer->id }}</td>
 <td>{{ $customer->name }}</td>
 <td>{{ $customer->email }}</td>
-<td>{{ $customer->address }}</td>
+<!-- <td>{{ $customer->address }}</td> -->
 <td>
 <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
 <a class="btn btn-info" id="show-customer" data-toggle="modal" data-id="{{ $customer->id }}" >Show</a>
@@ -74,10 +75,10 @@
 </div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12">
-<div class="form-group">
+<!-- <div class="form-group">
 <strong>Address:</strong>
 <input type="text" name="address" id="address" class="form-control" placeholder="Address" onchange="validate()" onkeypress="validate()">
-</div>
+</div> -->
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 <button type="submit" id="btn-save" name="btnsave" class="btn btn-primary" disabled>Submit</button>
@@ -105,7 +106,7 @@
 <table>
 <tr><td><strong>Name:</strong></td><td>{{$customer->name}}</td></tr>
 <tr><td><strong>Email:</strong></td><td>{{$customer->email}}</td></tr>
-<tr><td><strong>Address:</strong></td><td>{{$customer->address}}</td></tr>
+<!-- <tr><td><strong>Address:</strong></td><td>{{$customer->address}}</td></tr> -->
 <tr><td colspan="2" style="text-align: right "><a href="{{ route('customers.index') }}" class="btn btn-danger">OK</a> </td></tr>
 </table>
 @endif
